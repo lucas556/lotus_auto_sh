@@ -66,6 +66,7 @@ TOKEN=
 API=
 export MINER_API_INFO=$TOKEN:$API
 EOF
+source ~/.bashrc
 
 cp /filecoin-proof-parameters/lotus_daemon/api /lotus_daemon
 cp /filecoin-proof-parameters/lotus_daemon/token /lotus_daemon
