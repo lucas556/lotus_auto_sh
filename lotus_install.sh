@@ -42,6 +42,7 @@ echo 'export GOPROXY=https://goproxy.cn' >> ~/.bashrc
 source ~/.bashrc
 
 # lotus
+git config --global url.“https://gitclone.com/".insteadOf https://
 git clone -b ntwk-calibration https://github.com/filecoin-project/lotus.git /lotus
 cd /lotus
 # 编译
