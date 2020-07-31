@@ -42,8 +42,7 @@ echo 'export GOPROXY=https://goproxy.cn' >> ~/.bashrc
 source ~/.bashrc
 
 # lotus
-git config --global url.“https://gitclone.com/".insteadOf https://
-git clone -b ntwk-calibration https://github.com/filecoin-project/lotus.git /lotus
+git clone -b ntwk-calibration https://gitclone.com/github.com/filecoin-project/lotus.git /lotus
 cd /lotus
 # 编译
 env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all
