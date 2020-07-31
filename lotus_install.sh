@@ -77,6 +77,19 @@ cp /filecoin-proof-parameters/lotus_daemon/token /lotus_daemon
 # 如果是miner 初始化矿工
 /lotus/lotus-miner init --actor=t023871 --owner=t3xbnqjt2ulvohp63obag77kaqheobyo3ypxgyre6smomojc43bsytkbqtx75awsxgj2frnbduelbfqyoa4dgq
 
+cat > /etc/supervisor/conf.d/lotusminer.conf <<EOF
+[program:lotus_miner]
+environment=LOTUS_PATH=/lotus_daemon,LOTUS_STORAGE_PATH=/lotusstorage,FIL_PROOFS_PARAMETER_CACHE=/filecoin-proof-parameters,FIL_PROOFS_USE_GPU_TREE_BUILDER=1,FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1,FIL_PROOFS_MAXIMIZE_CACHING=1,RUST_LOG=Trace
+directory=/lotus/
+command=/lotus/lotus-miner run
+autostart=true
+autorestart=true
+startsecs=3
+startretries=100
+redirect_stderr=true
+stdout_logfile = /lotusstorage/lotusminer.log
+loglevel=info
+EOF
 # supervisor
 
 
