@@ -51,7 +51,7 @@ make install
 
 # nfs mount
 mkdir -p /filecoin-proof-parameters
-sudo mount -t nfs -o vers=4 192.168.81.100:/ filecoin-proof-parameters
+sudo mount -t nfs -o vers=4 192.168.81.100:/ /filecoin-proof-parameters
 echo '192.168.81.100:/ /filecoin-proof-parameters nfs   defaults,timeo=900,retrans=5,_netdev  0 0' >> /etc/fstab
 
 #lotus 环境变量
