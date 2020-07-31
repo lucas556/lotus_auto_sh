@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # 更换中科大源
 sudo cp sources.list /etc/apt/sources.list
