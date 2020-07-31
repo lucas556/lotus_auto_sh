@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 更换中科大源
-sudo mv sources.list /etc/apt/sources.list.bak
+sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
 cat > /etc/apt/sources.list <<EOF
 ##中科大源
 
