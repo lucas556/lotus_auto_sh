@@ -90,6 +90,9 @@ redirect_stderr=true
 stdout_logfile = /lotusstorage/lotusminer.log
 loglevel=info
 EOF
+
+supervisorctl reread
+supervisorctl update
 # supervisor
 
 
