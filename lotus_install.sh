@@ -56,7 +56,7 @@ echo '192.168.81.100:/ /filecoin-proof-parameters nfs   defaults,timeo=900,retra
 
 #lotus 环境变量
 mkdir -p /lotus_daemon
-cat > ~/.bashrc <<EOF
+cat >> ~/.bashrc << \EOF
 export LOTUS_PATH=/lotus_daemon/
 export LOTUS_STORAGE_PATH=/lotusstorage/
 export FIL_PROOFS_PARAMETER_CACHE=/filecoin-proof-parameters/
