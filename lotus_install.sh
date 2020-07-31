@@ -72,6 +72,11 @@ source ~/.bashrc
 cp /filecoin-proof-parameters/lotus_daemon/api /lotus_daemon
 cp /filecoin-proof-parameters/lotus_daemon/token /lotus_daemon
 
+/lotus/lotus new wallet bls  # 创建挖矿账户
+# 水龙头地址: https://faucet.calibration.fildev.network/miner.html
+# 如果是miner 初始化矿工
+/lotus/lotus-miner init --actor=t023871 --owner=t3xbnqjt2ulvohp63obag77kaqheobyo3ypxgyre6smomojc43bsytkbqtx75awsxgj2frnbduelbfqyoa4dgq
+
 # supervisor
 
 
