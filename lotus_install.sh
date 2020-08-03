@@ -51,9 +51,9 @@ env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_
 make install
 
 # nfs mount
-mkdir -p /filecoin-proof-parameters
-sudo mount -t nfs -o vers=4 192.168.81.100:/ /filecoin-proof-parameters
-echo '192.168.81.100:/ /filecoin-proof-parameters nfs   defaults,timeo=900,retrans=5,_netdev  0 0' >> /etc/fstab
+# mkdir -p /filecoin-proof-parameters
+# sudo mount -t nfs -o vers=4 192.168.81.100:/ /filecoin-proof-parameters
+# echo '192.168.81.100:/ /filecoin-proof-parameters nfs   defaults,timeo=900,retrans=5,_netdev  0 0' >> /etc/fstab
 
 #lotus 环境变量
 mkdir -p /lotus_daemon
@@ -77,7 +77,8 @@ cp /filecoin-proof-parameters/lotus_daemon/token /lotus_daemon
 /lotus/lotus new wallet bls  # 创建挖矿账户
 # 水龙头地址: https://faucet.calibration.fildev.network/miner.html
 # 如果是miner 初始化矿工
-/lotus/lotus-miner init --actor=t023871 --owner=t3xbnqjt2ulvohp63obag77kaqheobyo3ypxgyre6smomojc43bsytkbqtx75awsxgj2frnbduelbfqyoa4dgq
+# /lotus/lotus-miner init --owner=t3w6pa5srdttgep6lifglec6zceq47xd5k7wjdwbi3h3wmnwwybdckva3enyiof3nbtwtumbh3im72quxsg5fa --sector-size=32GiB
+# /lotus/lotus-miner init --actor=t023871 --owner=t3xbnqjt2ulvohp63obag77kaqheobyo3ypxgyre6smomojc43bsytkbqtx75awsxgj2frnbduelbfqyoa4dgq --sector-size=32GiB
 
 cat > /etc/supervisor/conf.d/lotusminer.conf <<EOF
 [program:lotus_miner]
