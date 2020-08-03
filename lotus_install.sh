@@ -94,6 +94,22 @@ stdout_logfile = /lotusstorage/lotusminer.log
 loglevel=info
 EOF
 
+# worker
+cat > /etc/supervisor/conf.d/lotusminer.conf <<EOF
+[program:lotus_worker]
+environment=LOTUS_PATH=/lotus_daemon,WORKER_PATH=/lotusworker,FIL_PROOFS_PARAMETER_CACHE=/proof,MINER_API_INFO=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0._etEL8c67sJlTGoJN7G02mX9SgoxLULTvS66R5tphPY:/ip4/192.168.81.100/tcp/2233/http,FIL_PROOFS_USE_GPU_TREE_BUILDER=1,FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1,FIL_PROOFS_MAXIMIZE_CACHING=1,RUST_LOG=Trace
+directory=/lotus/
+command=/lotus/lotus-worker run
+autostart=true
+autorestart=true
+startsecs=3
+startretries=100
+redirect_stderr=true
+stdout_logfile = /lotusworker/lotusworker.log
+loglevel=info
+EOF
+
+
 supervisorctl reread
 supervisorctl update
 # supervisor
