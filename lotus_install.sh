@@ -96,6 +96,11 @@ EOF
 supervisorctl reread
 supervisorctl update
 # supervisor
+# 设置SWAP
+sudo dd if=/dev/zero of=/swap bs=1G count=128
+sudo chmod 600 /swap
+sudo mkswap /swap
+sudo swapon /swap
 
 # 显卡驱动
 sudo apt-get -y install ubuntu-drivers-common
