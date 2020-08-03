@@ -42,8 +42,10 @@ echo 'export GOPROXY=https://goproxy.cn' >> ~/.bashrc
 source ~/.bashrc
 
 # lotus
-git clone -b ntwk-calibration https://gitclone.com/github.com/filecoin-project/lotus.git /lotus
+cd /
+git clone -b ntwk-calibration-8.1.0 https://github.com/filecoin-project/lotus.git
 cd /lotus
+git checkout -b ntwk-calibration-8.1.0
 # 编译
 env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all
 make install
