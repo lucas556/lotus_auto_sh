@@ -82,7 +82,7 @@ export MINER_API_INFO=$i_token:$i_api
 EOF
   
   # worker
-  cat > /etc/supervisor/conf.d/lotusminer.conf << EOF
+  cat > /etc/supervisor/conf.d/lotusminer.conf << 'EOF'
 [program:lotus_worker]
 environment=LOTUS_PATH=/lotus_daemon,WORKER_PATH=/lotusworker,FIL_PROOFS_PARAMETER_CACHE=/proof,FIL_PROOFS_USE_GPU_TREE_BUILDER=1,MINER_API_INFO=$i_token:$i_api,FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1,FIL_PROOFS_MAXIMIZE_CACHING=1,RUST_LOG=Trace
 directory=/lotus/
@@ -103,7 +103,7 @@ EOF
         echo 'export FIL_PROOFS_USE_GPU_TREE_BUILDER=1' >> ~/.bashrc
     ;;
     [nN]*)
-      cat > /etc/supervisor/conf.d/lotusminer.conf << EOF
+      cat > /etc/supervisor/conf.d/lotusminer.conf << 'EOF'
 [program:lotus_worker]
 environment=LOTUS_PATH=/lotus_daemon,WORKER_PATH=/lotusworker,FIL_PROOFS_PARAMETER_CACHE=/proof,MINER_API_INFO=$i_token:$i_api,FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1,FIL_PROOFS_MAXIMIZE_CACHING=1,RUST_LOG=Trace
 directory=/lotus/
