@@ -31,7 +31,7 @@ function install_environment()
 
   # rustc
   mkdir -p $HOME/.cargo/
-  cat > $HOME/.cargo/config <<EOF
+  cat > $HOME/.cargo/config << EOF
   [source.crates-io]
   replace-with = 'tuna'
   [source.tuna]
@@ -60,9 +60,11 @@ function install_lotus()
 
 function set_lotus()
 {
+  read -p "请输入miner token" i_token
+  read -p "请输入miner api" i_api
   #lotus 环境变量
   mkdir -p /lotus_daemon
-  cat >> ~/.bashrc << \EOF
+  cat >> ~/.bashrc << \'EOF'
   export LOTUS_PATH=/lotus_daemon/
   # export LOTUS_STORAGE_PATH=/lotusstorage/
   export FIL_PROOFS_PARAMETER_CACHE=/proof
@@ -70,11 +72,25 @@ function set_lotus()
   # export FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1
   # export FIL_PROOFS_USE_GPU_TREE_BUILDER=1
   export FIL_PROOFS_MAXIMIZE_CACHING=1
-  TOKEN=
-  API=
-  export MINER_API_INFO=$TOKEN:$API
+  export MINER_API_INFO=$i_token:$i_api
   EOF
   
+  # worker
+  cat > /etc/supervisor/conf.d/lotusminer.conf << 'EOF'
+  [program:lotus_worker]
+  # FIL_PROOFS_USE_GPU_TREE_BUILDER=1,
+  environment=LOTUS_PATH=/lotus_daemon,WORKER_PATH=/lotusworker,FIL_PROOFS_PARAMETER_CACHE=/proof,MINER_API_INFO=$i_token:$i_api,FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1,FIL_PROOFS_MAXIMIZE_CACHING=1,RUST_LOG=Trace
+  directory=/lotus/
+  command=/lotus/lotus-worker run
+  autostart=true
+  autorestart=true
+  startsecs=3
+  startretries=100
+  redirect_stderr=true
+  stdout_logfile = /lotusworker/lotusworker.log
+  loglevel=info
+  EOF
+
   read -p "是否开启GPU支持?[y/n]" input
   case $input in
     y|Y)
