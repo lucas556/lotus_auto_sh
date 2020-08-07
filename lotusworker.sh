@@ -1,6 +1,7 @@
 #!/bin/bash
 
-function replace_source(){
+function replace_source()
+{
   # 更换中科大源
   sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
   cat > /etc/apt/sources.list <<EOF
@@ -23,7 +24,8 @@ function replace_source(){
   echo '更新源成功'
 }
 
-function install_environment(){
+function install_environment()
+{
 # 依赖
 sudo apt -y install golang-go mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl nfs-common supervisor
 
@@ -43,19 +45,21 @@ echo 'export GOPROXY=https://goproxy.cn' >> ~/.bashrc
 echo '环境安装成功,请执行 source ~/.bashrc '
 }
 
-function install_lotus(){
-# lotus
-cd /
-git clone -b ntwk-calibration-8.1.0 https://gitclone.com/github.com/filecoin-project/lotus.git
-cd /lotus
-git checkout -b ntwk-calibration-8.1.0
-# 编译
-env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all
-make install
-echo 'lotus安装成功'
+function install_lotus()
+{
+  # lotus
+  cd /
+  git clone -b ntwk-calibration-8.1.0 https://gitclone.com/github.com/filecoin-project/lotus.git
+  cd /lotus
+  git checkout -b ntwk-calibration-8.1.0
+  # 编译
+  env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all
+  make install
+  echo 'lotus安装成功'
 }
 
-function set_lotus(){
+function set_lotus()
+{
   #lotus 环境变量
   mkdir -p /lotus_daemon
   cat >> ~/.bashrc << \EOF
@@ -85,7 +89,7 @@ function set_lotus(){
         echo "Just input y or n,please"
         exit 1
     ;;
-esac
+  esac
   echo 'lotus配置完成,请执行 source ~/.bashrc ,后运行lotus-miner测试'
 }
 
@@ -107,7 +111,7 @@ function menu()
 eof
 }
 
-  function usage()
+function usage()
 {
     read -p "please input your choice: " choice
     case $choice in
@@ -130,12 +134,12 @@ eof
     esac
 }
 
-  function  main()
+function  main()
 {
-    while true
+  while true
     do
-        menu
-        usage
+      menu
+      usage
     done
 }
 
