@@ -4,7 +4,7 @@ function replace_source()
 {
   # 更换中科大源
   sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
-  cat > /etc/apt/sources.list <<EOF
+  cat > /etc/apt/sources.list << EOF
   ##中科大源
   deb https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
   deb-src https://mirrors.ustc.edu.cn/ubuntu/ bionic main restricted universe multiverse
