@@ -48,7 +48,7 @@ function install_lotus()
 {
   # lotus
   cd /
-  git clone -b ntwk-calibration-8.1.0 https://gitclone.com/github.com/filecoin-project/lotus.git
+  git clone -b ntwk-calibration-8.1.0 https://github.com/filecoin-project/lotus.git
   cd /lotus
   git checkout -b ntwk-calibration-8.1.0
   # 编译
