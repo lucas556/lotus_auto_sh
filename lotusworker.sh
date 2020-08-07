@@ -70,7 +70,7 @@ function set_lotus()
   
   read -p "请输入miner token" i_token
   read -p "请输入miner api" i_api
-  cat >> ~/.bashrc << \'EOF'
+  cat >> ~/.bashrc << \EOF
 export LOTUS_PATH=/lotus_daemon/
 # export LOTUS_STORAGE_PATH=/lotusstorage/
 export FIL_PROOFS_PARAMETER_CACHE=/proof
