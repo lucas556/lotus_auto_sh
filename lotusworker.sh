@@ -2,7 +2,6 @@
 
 function replace_source()
 {
-  # 更换中科大源
   sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
   cat > /etc/apt/sources.list << EOF
 ##阿里源
