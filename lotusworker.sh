@@ -2,6 +2,7 @@
 
 function replace_source()
 {
+  echo "更新源开始"
   sudo mv /etc/apt/sources.list /etc/apt/sources.list.bak
   cat > /etc/apt/sources.list << EOF
 ##阿里源
@@ -20,7 +21,6 @@ EOF
   # golang
   sudo add-apt-repository -y ppa:longsleep/golang-backports
   apt-get update
-  echo "更新源成功"
 }
 
 function install_environment()
@@ -30,7 +30,7 @@ function install_environment()
 
   # rustc
   mkdir -p $HOME/.cargo/
-  cat > $HOME/.cargo/config << 'EOF'
+  cat > $HOME/.cargo/config << EOF
 [source.crates-io]
 replace-with = 'tuna'
 [source.tuna]
@@ -69,7 +69,7 @@ function set_lotus()
   
   read -p "请输入miner token" i_token
   read -p "请输入miner api" i_api
-  cat >> ~/.bashrc << \EOF
+  cat >> ~/.bashrc << 'EOF'
 export LOTUS_PATH=/lotus_daemon/
 # export LOTUS_STORAGE_PATH=/lotusstorage/
 export FIL_PROOFS_PARAMETER_CACHE=/proof
@@ -124,21 +124,41 @@ EOF
   echo "lotus配置完成,请执行 source ~/.bashrc 后运行lotus-miner测试"
 }
 
+function swap()
+{
+    read -p "请输入缓存大小GB" s_size
+    sudo dd if=/dev/zero of=/swap bs=1G count=$s_size
+    sudo chmod 600 /swap
+    sudo mkswap /swap
+    sudo swapon /swap
+    echo "swap修改完成,在/etc/fstab修改开机启动并重启"
+}
+
+function i_cuda()
+{
+    sudo apt-get -y install ubuntu-drivers-common
+    sudo ubuntu-drivers autoinstall
+    wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1804/x86_64/cuda-ubuntu1804.pin
+    sudo mv cuda-ubuntu1804.pin /etc/apt/preferences.d/cuda-repository-pin-600
+    wget http://developer.download.nvidia.com/compute/cuda/10.2/Prod/local_installers/cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+    sudo dpkg -i cuda-repo-ubuntu1804-10-2-local-10.2.89-440.33.01_1.0-1_amd64.deb
+    sudo apt-key add /var/cuda-repo-10-2-local-10.2.89-440.33.01/7fa2af80.pub
+    sudo apt-get update
+    sudo apt-get -y install cuda
+}
+
 function menu()
 {
     cat <<eof
-    
- *************************************
-*                MENU                  *
+ ************************************************
+*                MENU                    *
 
-*   1.更换中科大源        2.安装环境    *
+*   1.更换中科大源        2.安装环境         *
 
-*   3.安装lotus          4.配置lotus      *
+*   3.安装lotus          4.配置lotus       *
 
-*   5.exit                 *
-
-
- *************************************
+*   5.设置swap           6.安装显卡驱动     *
+ ***********************************************
 eof
 }
 
@@ -159,9 +179,14 @@ function usage()
             set_lotus
             ;;
         5)
+            swap
+            ;;
+        6)
+            i_cuda
+            ;;
+        7)
             exit 0
             ;;
-
     esac
 }
 
