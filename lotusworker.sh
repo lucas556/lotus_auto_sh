@@ -48,9 +48,9 @@ function install_lotus()
 {
   # lotus
   cd /
-  git clone -b ntwk-calibration-8.8.0 https://github.com.cnpmjs.org/filecoin-project/lotus.git
+  git clone -b ntwk-calibration-8.13.1 https://github.com.cnpmjs.org/filecoin-project/lotus.git
   cd /lotus
-  git checkout -b ntwk-calibration-8.8.0
+  git checkout -b ntwk-calibration-8.13.1
   # 编译
   env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all
   make install
