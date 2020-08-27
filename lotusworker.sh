@@ -24,7 +24,7 @@ function install_environment()
 {
   # golang
   sudo add-apt-repository -y ppa:longsleep/golang-backports
-  apt install golang-1.14
+  apt install -y golang-1.14
   ln -s /usr/lib/go-1.14/bin/go /usr/bin/go
   # 依赖
   sudo apt -y install golang-go mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl nfs-common supervisor
@@ -49,7 +49,7 @@ function install_lotus()
 {
   # lotus
   cd /
-  git clone -b v0.5.4 https://github.com.cnpmjs.org/filecoin-project/lotus.git
+  git clone -b v0.5.4 https://github.com/filecoin-project/lotus.git
   cd /lotus
   git checkout -b v0.5.4
   # 编译
