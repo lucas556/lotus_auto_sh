@@ -17,14 +17,15 @@ deb-src http://mirrors.aliyun.com/ubuntu/ bionic-backports main restricted unive
 deb http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
 deb-src http://mirrors.aliyun.com/ubuntu/ bionic-proposed main restricted universe multiverse
 EOF
-
-  # golang
-  sudo add-apt-repository -y ppa:longsleep/golang-backports
-  apt-get update
+apt-get update
 }
 
 function install_environment()
 {
+  # golang
+  sudo add-apt-repository -y ppa:longsleep/golang-backports
+  apt install golang-1.14
+  ln -s /usr/lib/go-1.14/bin/go /usr/bin/go
   # 依赖
   sudo apt -y install golang-go mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl nfs-common supervisor
 
