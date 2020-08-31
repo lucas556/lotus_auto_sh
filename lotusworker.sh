@@ -32,10 +32,7 @@ function install_environment()
   # rustc
   RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -sSf | sh /dev/stdin "-y"
   cat > $HOME/.cargo/config << EOF
-[source.crates-io]
-replace-with = 'tuna'
-[source.tuna]
-registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+[source.rustcc]registry = "git://crates.rustcc.cn/crates.io-index"
 EOF
   echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
   echo 'export GOPROXY=https://goproxy.cn' >> ~/.bashrc
