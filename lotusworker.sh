@@ -27,7 +27,7 @@ function install_environment()
   apt install -y golang-1.14
   ln -s /usr/lib/go-1.14/bin/go /usr/bin/go
   # 依赖
-  sudo apt -y install golang-go mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl nfs-common supervisor
+  sudo apt -y install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl nfs-common supervisor
 
   # rustc
   mkdir -p $HOME/.cargo/
@@ -49,9 +49,9 @@ function install_lotus()
 {
   # lotus
   cd /
-  git clone -b v0.5.4 https://github.com/filecoin-project/lotus.git
+  git clone -b v0.5.6 https://github.com/filecoin-project/lotus.git
   cd /lotus
-  git checkout -b v0.5.4
+  git checkout -b v0.5.6
   # 编译
   env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all
   make install
@@ -128,10 +128,11 @@ EOF
 function swap()
 {
     read -p "请输入缓存大小GB" s_size
-    sudo dd if=/dev/zero of=/swap bs=1G count=$s_size
-    sudo chmod 600 /swap
-    sudo mkswap /swap
-    sudo swapon /swap
+    read -p "请输入缓存路径" s_file
+    sudo dd if=/dev/zero of=$s_file/swap bs=1G count=$s_size
+    sudo chmod 600 $s_file/swap
+    sudo mkswap $s_file/swap
+    sudo swapon $s_file/swap
     echo "swap修改完成,在/etc/fstab修改开机启动并重启"
 }
 
