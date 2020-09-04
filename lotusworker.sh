@@ -34,7 +34,11 @@ function install_environment()
   export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -sSf | sh /dev/stdin "-y"
   cat > $HOME/.cargo/config << EOF
-[source.rustcc]registry = "git://crates.rustcc.cn/crates.io-index"
+[source.crates-io]
+registry = "https://github.com/rust-lang/crates.io-index"
+replace-with = 'ustc'
+[source.ustc]
+registry = "git://mirrors.ustc.edu.cn/crates.io-index"
 EOF
   echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
   echo 'export GOPROXY=https://goproxy.cn' >> ~/.bashrc
