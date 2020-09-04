@@ -25,12 +25,14 @@ function install_environment()
   # golang
   sudo add-apt-repository -y ppa:longsleep/golang-backports
   apt install -y golang-1.14
-  ln -s /usr/lib/go-1.14/bin/go /usr/bin/go
+  # ln -s /usr/lib/go-1.14/bin/go /usr/bin/go
   # 依赖
   sudo apt -y install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl nfs-common supervisor
 
   # rustc
-  RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -sSf | sh /dev/stdin "-y"
+  export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
+  export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -sSf | sh /dev/stdin "-y"
   cat > $HOME/.cargo/config << EOF
 [source.rustcc]registry = "git://crates.rustcc.cn/crates.io-index"
 EOF
