@@ -27,7 +27,7 @@ function install_environment()
   apt install -y golang-1.14
   # ln -s /usr/lib/go-1.14/bin/go /usr/bin/go
   # 依赖
-  sudo apt -y install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config curl nfs-common supervisor
+  sudo apt -y install mesa-opencl-icd ocl-icd-opencl-dev gcc git bzr jq pkg-config llvm curl nfs-common supervisor
 
   # rustc
   export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
@@ -50,9 +50,9 @@ function install_lotus()
 {
   # lotus
   cd /
-  git clone -b v0.5.6 https://github.com/filecoin-project/lotus.git
+  git clone -b v0.7.1 https://github.com/filecoin-project/lotus.git
   cd /lotus
-  git checkout -b v0.5.6
+  git checkout -b v0.7.1
   # 编译
   env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all
   make install
