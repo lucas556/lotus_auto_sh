@@ -54,7 +54,7 @@ function install_lotus()
   cd /lotus
   git checkout -b v0.7.1
   # 编译
-  env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 make clean all
+  env RUSTFLAGS="-C target-cpu=native -g" FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1 FIL_PROOFS_USE_GPU_TREE_BUILDER=1 FFI_BUILD_FROM_SOURCE=1 RUST_BACKTRACE=1 make clean all
   make install
   echo "lotus安装成功"
 }
