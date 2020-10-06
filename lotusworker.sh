@@ -31,8 +31,7 @@ function install_environment()
   sudo apt -y install mesa-opencl-icd ocl-icd-opencl-dev gcc clang git bzr jq pkg-config llvm curl nfs-common supervisor
 
   # rustc
-  export RUSTUP_DIST_SERVER=https://mirrors.ustc.edu.cn/rust-static
-  export RUSTUP_UPDATE_ROOT=https://mirrors.ustc.edu.cn/rust-static/rustup
+  RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs -sSf | sh /dev/stdin "-y"
   cat > $HOME/.cargo/config << EOF
 [source.crates-io]
