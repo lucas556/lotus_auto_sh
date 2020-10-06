@@ -24,6 +24,7 @@ function install_environment()
 {
   # golang
   sudo add-apt-repository -y ppa:longsleep/golang-backports
+  apt-get update
   apt install -y golang-1.14
   ln -s /usr/lib/go-1.14/bin/go /usr/bin/go
   # 依赖
