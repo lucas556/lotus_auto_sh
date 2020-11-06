@@ -28,7 +28,7 @@ function install_environment()
   apt install -y golang-1.14
   ln -s /usr/lib/go-1.14/bin/go /usr/bin/go
   # 依赖
-  sudo apt -y install mesa-opencl-icd ocl-icd-opencl-dev gcc clang git bzr jq pkg-config llvm curl nfs-common supervisor
+  sudo apt -y install mesa-opencl-icd ocl-icd-opencl-dev gcc clang git bzr jq pkg-config llvm curl nfs-common supervisor hwloc libhwloc-dev
 
   # rustc
   RUSTUP_DIST_SERVER=https://mirrors.tuna.tsinghua.edu.cn/rustup
