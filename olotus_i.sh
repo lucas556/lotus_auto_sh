@@ -25,7 +25,7 @@ echo "更新源成功"
 
 echo "安装依赖"
 
-sudo apt -y install mesa-opencl-icd ocl-icd-opencl-dev gcc clang git bzr jq pkg-config llvm curl nfs-common supervisor hwloc libhwloc-dev ntpdate ubuntu-drivers-common
+sudo apt -y install mesa-opencl-icd ocl-icd-opencl-dev gcc make clang git bzr jq pkg-config llvm curl nfs-common supervisor hwloc libhwloc-dev ntpdate ubuntu-drivers-common
 echo "安装成功"
 
 echo "部署环境"
