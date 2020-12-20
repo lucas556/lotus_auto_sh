@@ -84,3 +84,22 @@ export FIL_PROOFS_PARAMETER_CACHE=/proof
 export MINER_API_INFO=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0._W3EuCHVFw1qdye3GBVnHRig0La3xTZvAKRIhvigswY:/ip4/192.168.20.21/tcp/2021/http
 export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/
 EOF
+
+
+  cat >> /etc/supervisor/conf.d/lotusworker.conf << 'EOF'
+[program:lotusworker]
+environment=LOTUS_PATH=/lotusdaemon,WORKER_PATH=/lotusworker,FIL_PROOFS_PARAMETER_CACHE=/proof,MINER_API_INFO=:/ip4/192.168.20.21/tcp/2021/http,FIL_PROOFS_USE_GPU_TREE_BUILDER=1,FIL_PROOFS_USE_GPU_COLUMN_BUILDER=1,FIL_PROOFS_SDR_PARENTS_CACHE_SIZE=1073741824,RUST_LOG=Trace
+directory=/lotus/
+command=/lotus/lotus-worker run --listen=192.168.20.91:2091 --attach /lotus_attach
+autostart=true
+autorestart=true
+startsecs=3
+startretries=100
+redirect_stderr=true
+stdout_logfile = /lotusworker/lotusworker.log
+loglevel=info
+EOF
+
+mkdir -p /lotusworker
+mkdir -p /lotus_attach
+
