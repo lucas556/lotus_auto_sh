@@ -102,4 +102,7 @@ EOF
 
 mkdir -p /lotusworker
 mkdir -p /lotus_attach
+mkdir -p /data
+
+mount -t nfs 192.168.20.50:/data /data
 
