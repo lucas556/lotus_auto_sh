@@ -68,3 +68,19 @@ sudo mkswap /swap
 sudo swapon /swap
 echo "swap修改完成,在/etc/fstab修改开机启动并重启"
 echo "设置SWAP"
+
+scp -r lucas@192.168.20.91:/lotus /
+cp /lotus/* /usr/local/bin/
+scp -r lucas@192.168.20.91:/lotusdaemon /
+scp -r lucas@192.168.20.91:/proof /
+
+scp lucas@192.168.20.91:/NVIDIA-Linux-x86_64-455.45.01.run ./
+
+  cat >> ~/.bashrc << 'EOF'
+export LOTUS_PATH=/lotusdaemon
+export LOTUS_MINER_PATH=/lotusminer
+export LOTUS_WORKER_PATH=/lotusworker
+export FIL_PROOFS_PARAMETER_CACHE=/proof
+export MINER_API_INFO=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBbGxvdyI6WyJyZWFkIiwid3JpdGUiLCJzaWduIiwiYWRtaW4iXX0._W3EuCHVFw1qdye3GBVnHRig0La3xTZvAKRIhvigswY:/ip4/192.168.20.21/tcp/2021/http
+export IPFS_GATEWAY="https://proof-parameters.s3.cn-south-1.jdcloud-oss.com/ipfs/
+EOF
