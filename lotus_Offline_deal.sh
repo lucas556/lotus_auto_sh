@@ -6,7 +6,6 @@ do
   echo '设置默认账户为:'$line
   /lotus/lotus wallet set-default $line
   proof_name=proof_${line:0:8}
-  echo '复制文件'
   echo '生成随机文件'
   sudo dd if=/dev/random of=/$proof_name bs=1G count=7.6
   echo '生成证书'
