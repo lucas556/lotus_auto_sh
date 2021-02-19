@@ -1,11 +1,14 @@
 #!/bin/bash
+
+
 for line in $(cat fil.txt)
 do
   echo '设置默认账户为:'$line
   /lotus/lotus wallet set-default $line
   proof_name=proof_${line:0:8}
   echo '复制文件'
-  cp /proof.params.tar.gz.00 /$proof_name
+  echo '生成随机文件'
+  sudo dd if=/dev/random of=/$proof_name bs=1G count=7.6
   echo '生成证书'
   /lotus/lotus client generate-car /$proof_name /lotusdaemon/$proof_name.car
   rm -rf /$proof_name
