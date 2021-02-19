@@ -18,6 +18,7 @@ do
   sleep 5
   echo 'miner导入交易'
   deal=$(cat deal.txt)
+  echo 'deal_cid:'$deal
   lotus-miner storage-deals import-data $deal /lotusdaemon/$proof_name.car
   sleep 5
 done
