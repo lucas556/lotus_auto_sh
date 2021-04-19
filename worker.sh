@@ -18,17 +18,15 @@ EOF
 apt-get update
 
 # 安装依赖
-sudo apt install -y make pkg-config mesa-opencl-icd ocl-icd-opencl-dev libclang-dev libhwloc-dev hwloc gcc git bzr jq tree openssh-server python3 cpufrequtils supervisor nfs-common
+sudo apt install -y make pkg-config mesa-opencl-icd ocl-icd-opencl-dev libclang-dev libhwloc-dev hwloc gcc git bzr jq tree openssh-server python3 cpufrequtils sysfsutils supervisor nfs-common
 
 # -----------------------------时钟校验------------------------------------------------
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ntpdate ntp.aliyun.com
 
 # -----------------------------CPU性能模式------------------------------------------------
-sudo cpufreq-set -g performance
-
-
-
+sudo cpufreq-set -g performance     # 重启后无效;必须安装cpufrequtils
+echo 'devices/system/cpu/cpu0/cpufreq/scaling_governor = performance' >> /etc/sysfs.conf  # 永久;必须安装sysfsutils
 
 # 设置 ulimit
 ulimit -n 1048576
