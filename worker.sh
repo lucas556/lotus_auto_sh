@@ -26,7 +26,7 @@ ntpdate ntp.aliyun.com
 
 # -----------------------------CPU性能模式------------------------------------------------
 sudo cpufreq-set -g performance     # 重启后无效;必须安装cpufrequtils
-echo 'devices/system/cpu/cpu0/cpufreq/scaling_governor = performance' >> /etc/sysfs.conf  # 永久;必须安装sysfsutils
+echo "devices/system/cpu/cpu0/cpufreq/scaling_governor = performance" >> /etc/sysfs.conf  # 永久;必须安装sysfsutils
 
 # 设置 ulimit
 ulimit -n 1048576
